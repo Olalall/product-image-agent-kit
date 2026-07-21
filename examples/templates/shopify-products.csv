@@ -1,0 +1,3 @@
+sku,product_name,category,style,output_count,target,requested_action,source_image,notes,shopify_handle,shopify_collection,shopify_image_slot
+DEMO-LAMP-01,Portable Desk Lamp,home office,"warm minimalist, soft shadows",2,mock_only,generate_mock_images,DEMO-LAMP-01.svg,"Shopify hero image mock; no badges or unsupported claims",portable-desk-lamp,home-office,hero
+DEMO-BAG-02,Travel Organizer Bag,travel,"premium neutral, clean compartments",1,mock_only,generate_mock_images,DEMO-BAG-02.svg,"Shopify collection image mock; highlight compartments without inventing logos",travel-organizer-bag,travel-accessories,collection

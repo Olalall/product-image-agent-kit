@@ -34,6 +34,12 @@ class ProductImageAgentTests(unittest.TestCase):
         self.assertEqual(result["asset_count"], 3)
         self.assertEqual(result["missing_images"], [])
 
+    def test_shopify_template_uses_canonical_required_columns(self) -> None:
+        tasks = load_products(PROJECT_ROOT / "examples" / "templates" / "shopify-products.csv")
+        self.assertEqual(len(tasks), 2)
+        self.assertEqual(tasks[0].sku, "DEMO-LAMP-01")
+        self.assertEqual(tasks[0].target, "mock_only")
+
     def test_external_publish_is_blocked(self) -> None:
         task = load_products(PROJECT_ROOT / "examples" / "products.csv")[2]
         plan = build_prompt_plan(task)

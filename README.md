@@ -9,11 +9,11 @@
 </p>
 
 <p align="center">
+  <a href="README.zh-CN.md">简体中文</a> ·
   <a href="#30-second-demo">30-second demo</a> ·
   <a href="#what-can-it-do">What it does</a> ·
   <a href="#safety-gate">Safety gate</a> ·
   <a href="#for-ai-agent-builders">For AI agents</a> ·
-  <a href="docs/project-introduction.zh-CN.md">中文介绍</a> ·
   <a href="CONTRIBUTING.md">Contributing</a>
 </p>
 
@@ -115,6 +115,8 @@ product-image-agent demo --clean --out runs\demo
 
 ## Example input
 
+See `examples/README.md` for the full example guide.
+
 `examples/products.csv`:
 
 ```csv
@@ -126,6 +128,12 @@ Source images live in:
 
 ```text
 examples/input-images/<SKU>.svg
+```
+
+A Shopify-oriented synthetic template is available at:
+
+```text
+examples/templates/shopify-products.csv
 ```
 
 ## Safety gate
@@ -236,7 +244,7 @@ This project is intentionally small and mock-first. If you want to contribute, s
 Good first issues:
 
 - Add a JSON input adapter.
-- Add a Shopify CSV template.
+- Extend the Shopify CSV template with more slots.
 - Add more QA checks for marketplace copy risks.
 - Add a real-provider adapter interface with an explicit cost-confirmation gate.
 

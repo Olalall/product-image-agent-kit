@@ -55,3 +55,11 @@ Type: public communication polish.
 Before: Chinese readers could misread GitHub's machine-translated "MIT license" as a Massachusetts Institute of Technology affiliation, and there was no ready-to-send Chinese introduction.
 
 After: the repository includes `docs/project-introduction.zh-CN.md`, Chinese launch snippets, and an explicit README license clarification.
+
+## 2026-07-21 - Chinese README and examples guide
+
+Type: documentation and starter-template improvement.
+
+Before: Chinese readers had a short introduction, but not a full quickstart README; examples were present but not explained in one place.
+
+After: the repository includes `README.zh-CN.md`, `examples/README.md`, and a synthetic Shopify CSV template at `examples/templates/shopify-products.csv`.

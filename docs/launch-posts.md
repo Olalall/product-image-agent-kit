@@ -81,3 +81,15 @@ Local-first AI product image workflow toolkit with mock generation, QA reports, 
 ```text
 ai-agents ecommerce image-generation workflow-automation product-images mock-first qa-report python cli
 ```
+
+## Chinese short intro
+
+```text
+我做了一个电商商品图 AI 自动化工具包。它不是单纯“让 AI 画图”，而是把商品图生产前后的流程也做进去：表格检查、素材匹配、prompt 规划、mock 输出、质检报告、日志、打包，以及上传/发布前的安全拦截。
+```
+
+## Chinese technical intro
+
+```text
+Product Image Agent Kit 是一个 local-first 的 AI workflow starter kit。输入 products.csv 和商品素材图后，它会完成 source-image scan、prompt planning、mock image generation、QA check、event logging，并输出 report.html、manifest.json、qa_report.json、events.jsonl 和 package.zip。默认 mock-first，不调用付费 API；遇到 live publish、upload、overwrite、delete 等动作时，会进入 human approval gate。
+```

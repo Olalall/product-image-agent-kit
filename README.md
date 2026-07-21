@@ -13,6 +13,7 @@
   <a href="#what-can-it-do">What it does</a> ·
   <a href="#safety-gate">Safety gate</a> ·
   <a href="#for-ai-agent-builders">For AI agents</a> ·
+  <a href="docs/project-introduction.zh-CN.md">中文介绍</a> ·
   <a href="CONTRIBUTING.md">Contributing</a>
 </p>
 
@@ -249,4 +250,4 @@ If this repo helps your e-commerce image automation work:
 
 ## License
 
-MIT
+MIT. This is a permissive open-source license; it does not mean this project is affiliated with, sponsored by, or endorsed by the Massachusetts Institute of Technology.

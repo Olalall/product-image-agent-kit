@@ -47,3 +47,11 @@ Type: public page cleanup.
 Before: after the first GitHub push, the README still contained a "Before publishing to GitHub" section.
 
 After: the README now uses a public-facing "Share this project" section with a star CTA and launch-post pointer.
+
+## 2026-07-21 - Chinese introduction and license clarification
+
+Type: public communication polish.
+
+Before: Chinese readers could misread GitHub's machine-translated "MIT license" as a Massachusetts Institute of Technology affiliation, and there was no ready-to-send Chinese introduction.
+
+After: the repository includes `docs/project-introduction.zh-CN.md`, Chinese launch snippets, and an explicit README license clarification.

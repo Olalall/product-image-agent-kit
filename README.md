@@ -230,6 +230,7 @@ This project is intentionally small and mock-first. If you want to contribute, s
 - Run `python -m unittest discover -s tests`.
 - Pick one roadmap item or open a focused issue.
 - Keep all sample data synthetic.
+- CI template: `docs/github-actions-ci.yml` can be copied to `.github/workflows/ci.yml` after the maintainer pushes with a token that has GitHub Actions workflow permission.
 
 Good first issues:
 

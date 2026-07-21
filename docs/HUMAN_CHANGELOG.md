@@ -28,7 +28,7 @@ Type: open-source packaging.
 
 Before: the repository had working code and docs, but lacked common GitHub contribution, security, issue-template, CI, and launch-copy files.
 
-After: the repository includes GitHub Actions CI, issue templates, `CONTRIBUTING.md`, `SECURITY.md`, and `docs/launch-posts.md`.
+After: the repository includes issue templates, `CONTRIBUTING.md`, `SECURITY.md`, `docs/launch-posts.md`, and a GitHub Actions CI template under `docs/github-actions-ci.yml`.
 
 Risk: this is a mock starter kit, not a production image-generation backend. Real image providers and external uploads are intentionally blocked until a future explicit approval gate is implemented.
 

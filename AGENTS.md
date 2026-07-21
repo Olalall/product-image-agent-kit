@@ -18,6 +18,7 @@ It must stay easy to clone, run, inspect, and extend.
 python -m pip install -e .
 python -m unittest discover -s tests
 python -m product_image_agent.cli demo --out runs\demo
+python -m product_image_agent.cli screenshot --report runs\demo\report.html --out docs\screenshots\report-demo.png
 python -m product_image_agent.cli scan --products examples\products.csv --images examples\input-images
 python -m product_image_agent.cli run --products examples\products.csv --images examples\input-images --out runs\manual
 ```

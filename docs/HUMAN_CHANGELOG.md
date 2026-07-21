@@ -79,3 +79,11 @@ Type: starter-template improvement.
 Before: the examples included generic CSV/JSON inputs and a Shopify-oriented template, but no Amazon-oriented package planning template.
 
 After: `examples/templates/amazon-image-package.csv` demonstrates synthetic main image, secondary feature image, and A+ banner planning slots without adding any Amazon upload behavior.
+
+## 2026-07-21 - Report screenshot automation
+
+Type: documentation automation improvement.
+
+Before: the README demo screenshot had to be captured manually from `runs/demo/report.html`.
+
+After: the CLI includes a `screenshot` command that uses local Chrome, Chromium, or Edge to regenerate `docs/screenshots/report-demo.png` from a generated report.

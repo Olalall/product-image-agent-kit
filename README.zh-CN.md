@@ -119,8 +119,24 @@ CONTRIBUTING.md
 - Shopify CSV 模板；
 - Amazon 图片包模板；
 - 更多 QA 规则；
-- report.html 截图自动化；
+- 改进 report.html 截图自动化；
 - 真实 provider adapter 的安全接口设计。
+
+## 重新生成 README 截图
+
+先运行 demo：
+
+```powershell
+python -m product_image_agent.cli demo --clean --out runs\demo
+```
+
+再截图：
+
+```powershell
+python -m product_image_agent.cli screenshot --report runs\demo\report.html --out docs\screenshots\report-demo.png
+```
+
+截图命令会自动寻找本地 Chrome、Chromium 或 Edge。如果找不到，可以显式传入浏览器路径。
 
 ## 关于 MIT License
 

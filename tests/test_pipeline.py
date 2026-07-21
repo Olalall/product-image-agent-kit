@@ -14,6 +14,7 @@ sys.path.insert(0, str(PROJECT_ROOT / "src"))
 from product_image_agent.pipeline import run_pipeline  # noqa: E402
 from product_image_agent.planner import build_prompt_plan  # noqa: E402
 from product_image_agent.scanner import load_products, scan_inputs  # noqa: E402
+from product_image_agent.screenshot import build_screenshot_command  # noqa: E402
 
 
 class ProductImageAgentTests(unittest.TestCase):
@@ -106,6 +107,17 @@ class ProductImageAgentTests(unittest.TestCase):
         products.write_text(json.dumps({"items": []}), encoding="utf-8")
         with self.assertRaises(ValueError):
             load_products(products)
+
+    def test_screenshot_command_uses_file_uri_and_output_path(self) -> None:
+        report = self.tmp / "report.html"
+        output = self.tmp / "report.png"
+        report.write_text("<html><body>demo</body></html>", encoding="utf-8")
+        command = build_screenshot_command("chrome", report, output, window_size="1000,800")
+        self.assertEqual(command[0], "chrome")
+        self.assertIn("--headless", command)
+        self.assertIn("--window-size=1000,800", command)
+        self.assertIn(f"--screenshot={output.resolve()}", command)
+        self.assertEqual(command[-1], report.resolve().as_uri())
 
 
 if __name__ == "__main__":

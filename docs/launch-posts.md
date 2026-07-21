@@ -82,6 +82,13 @@ Local-first AI product image workflow toolkit with mock generation, QA reports, 
 ai-agents ecommerce image-generation workflow-automation product-images mock-first qa-report python cli
 ```
 
+## Regenerate launch screenshot
+
+```powershell
+python -m product_image_agent.cli demo --clean --out runs\demo
+python -m product_image_agent.cli screenshot --report runs\demo\report.html --out docs\screenshots\report-demo.png
+```
+
 ## Chinese short intro
 
 ```text

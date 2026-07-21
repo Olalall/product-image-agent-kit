@@ -7,6 +7,7 @@ from pathlib import Path
 
 from .pipeline import run_pipeline
 from .scanner import scan_inputs
+from .screenshot import capture_report_screenshot
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_PRODUCTS = PROJECT_ROOT / "examples" / "products.csv"
@@ -34,6 +35,10 @@ def main(argv: list[str] | None = None) -> None:
         if isinstance(summary, dict) and summary.get("status") == "fail":
             raise SystemExit(1)
         return
+    if args.command == "screenshot":
+        output = capture_report_screenshot(args.report, args.out, browser=args.browser, window_size=args.window_size)
+        print(json.dumps({"status": "pass", "screenshot": str(output)}, ensure_ascii=False, indent=2))
+        return
     raise SystemExit("Missing command. Use --help.")
 
 
@@ -54,6 +59,12 @@ def build_parser() -> argparse.ArgumentParser:
     run.add_argument("--images", type=Path, required=True)
     run.add_argument("--out", type=Path, default=Path("runs/manual"))
     run.add_argument("--clean", action="store_true", help="Delete the selected output folder before running.")
+
+    screenshot = sub.add_parser("screenshot", help="Capture a PNG screenshot from a generated report.html.")
+    screenshot.add_argument("--report", type=Path, default=Path("runs/demo/report.html"))
+    screenshot.add_argument("--out", type=Path, default=Path("docs/screenshots/report-demo.png"))
+    screenshot.add_argument("--browser", type=Path, help="Optional path to Chrome, Chromium, or Edge.")
+    screenshot.add_argument("--window-size", default="1440,1200", help="Browser window size, for example 1440,1200.")
     return parser
 
 

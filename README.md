@@ -106,6 +106,18 @@ Run tests:
 python -m unittest discover -s tests
 ```
 
+Regenerate the README screenshot after running the demo:
+
+```powershell
+python -m product_image_agent.cli screenshot --report runs\demo\report.html --out docs\screenshots\report-demo.png
+```
+
+The screenshot command uses a local Chrome, Chromium, or Edge executable. If the browser is not auto-detected, pass:
+
+```powershell
+python -m product_image_agent.cli screenshot --browser "C:\Program Files\Google\Chrome\Application\chrome.exe"
+```
+
 Use without installing:
 
 ```powershell
@@ -256,7 +268,7 @@ src/product_image_agent/
 
 - [ ] Real-provider adapter interface with explicit cost confirmation.
 - [ ] Shopify and Amazon CSV templates.
-- [ ] Browser screenshot automation for `report.html`.
+- [x] Browser screenshot automation for `report.html`.
 - [ ] More QA rules for copy claims, text density, aspect ratios, and source-image anchoring.
 - [ ] Web UI for non-technical operators.
 

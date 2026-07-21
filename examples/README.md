@@ -150,3 +150,19 @@ runs/manual/package.zip
 ```
 
 Use `report.html` for human review and the JSON/JSONL files for agent or automation handoff.
+
+## Regenerate the README screenshot
+
+Run the demo:
+
+```powershell
+python -m product_image_agent.cli demo --clean --out runs\demo
+```
+
+Capture the report screenshot:
+
+```powershell
+python -m product_image_agent.cli screenshot --report runs\demo\report.html --out docs\screenshots\report-demo.png
+```
+
+The screenshot command uses a local Chrome, Chromium, or Edge executable. If auto-detection fails, pass `--browser <path>`.

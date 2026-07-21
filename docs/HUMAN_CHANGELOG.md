@@ -1,5 +1,13 @@
 # Human Changelog
 
+## 2026-07-21 - v0.2.0 release packaging
+
+Type: release packaging.
+
+Before: the public release was still `v0.1.0`, even though the repository had added JSON input, Shopify/Amazon templates, screenshot automation, and provider cost-gate work after the first launch.
+
+After: the package version is updated to `0.2.0` so the next GitHub release can describe the expanded starter workflow.
+
 ## 2026-07-21 - Public starter rebuild
 
 Type: new open-source project rebuild.

@@ -63,3 +63,11 @@ Type: documentation and starter-template improvement.
 Before: Chinese readers had a short introduction, but not a full quickstart README; examples were present but not explained in one place.
 
 After: the repository includes `README.zh-CN.md`, `examples/README.md`, and a synthetic Shopify CSV template at `examples/templates/shopify-products.csv`.
+
+## 2026-07-21 - JSON input adapter
+
+Type: input compatibility improvement.
+
+Before: the workflow only loaded product tasks from CSV files.
+
+After: `--products` accepts both CSV and JSON inputs, with a synthetic `examples/products.json` sample and tests covering JSON runs.

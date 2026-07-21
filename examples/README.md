@@ -7,6 +7,7 @@ This folder contains synthetic data for the default no-key demo.
 ```text
 examples/
   products.csv
+  products.json
   input-images/
     DEMO-LAMP-01.svg
     DEMO-BAG-02.svg
@@ -28,6 +29,30 @@ examples/
 | `requested_action` | No | Intended action. Live publish/upload actions are blocked. |
 | `source_image` | No | Expected source image filename. |
 | `notes` | No | Operator notes for prompt planning and QA context. |
+
+## `products.json` shape
+
+JSON input can be either a top-level array of product objects or an object with a `products` array.
+
+Recommended shape:
+
+```json
+{
+  "products": [
+    {
+      "sku": "DEMO-LAMP-01",
+      "product_name": "Portable Desk Lamp",
+      "category": "home office",
+      "style": "warm minimalist, soft shadows",
+      "output_count": 2,
+      "target": "mock_only",
+      "requested_action": "generate_mock_images",
+      "source_image": "DEMO-LAMP-01.svg",
+      "notes": "JSON input demo; show scale, no fake certification badges"
+    }
+  ]
+}
+```
 
 ## Demo rows
 
@@ -60,6 +85,12 @@ MY-SKU-001.svg
 
 ```powershell
 python -m product_image_agent.cli run --products examples\products.csv --images examples\input-images --out runs\manual --clean
+```
+
+For JSON input:
+
+```powershell
+python -m product_image_agent.cli run --products examples\products.json --images examples\input-images --out runs\json-demo --clean
 ```
 
 ## Output artifacts

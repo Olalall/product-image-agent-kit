@@ -34,7 +34,7 @@ If you are building AI image automation for e-commerce, **star this repo** to fo
 
 ### 1. Turn product rows into prompt plans
 
-Input a simple CSV with SKU, product name, category, style, and output count. The planner creates structured prompt plans while keeping the product source image as the visual anchor.
+Input a simple CSV or JSON file with SKU, product name, category, style, and output count. The planner creates structured prompt plans while keeping the product source image as the visual anchor.
 
 ### 2. Generate mock outputs without API keys
 
@@ -94,6 +94,12 @@ Run a local workflow:
 python -m product_image_agent.cli run --products examples\products.csv --images examples\input-images --out runs\manual --clean
 ```
 
+Run the same workflow from JSON:
+
+```powershell
+python -m product_image_agent.cli run --products examples\products.json --images examples\input-images --out runs\json-demo --clean
+```
+
 Run tests:
 
 ```powershell
@@ -122,6 +128,21 @@ See `examples/README.md` for the full example guide.
 ```csv
 sku,product_name,category,style,output_count,target,requested_action,source_image,notes
 DEMO-LAMP-01,Portable Desk Lamp,home office,"warm minimalist, soft shadows",2,mock_only,generate_mock_images,DEMO-LAMP-01.svg,"show scale, no fake certification badges"
+```
+
+`examples/products.json`:
+
+```json
+{
+  "products": [
+    {
+      "sku": "DEMO-LAMP-01",
+      "product_name": "Portable Desk Lamp",
+      "style": "warm minimalist, soft shadows",
+      "output_count": 2
+    }
+  ]
+}
 ```
 
 Source images live in:

@@ -1,6 +1,6 @@
 # Product Image Agent Kit
 
-本地优先的电商商品图 AI 工作流工具包：**商品 CSV 输入**、**素材图扫描**、**prompt 规划**、**mock 商品图生成**、**QA 报告**、**运行日志**、**交付包导出**，并在真实上传/发布前设置人工确认安全门。
+本地优先的电商商品图 AI 工作流工具包：**商品 CSV/JSON 输入**、**素材图扫描**、**prompt 规划**、**mock 商品图生成**、**QA 报告**、**运行日志**、**交付包导出**，并在真实上传/发布前设置人工确认安全门。
 
 [English README](README.md) · [中文项目介绍话术](docs/project-introduction.zh-CN.md)
 
@@ -99,6 +99,7 @@ examples/README.md
 里面说明了：
 
 - `products.csv` 每列含义；
+- `products.json` 输入格式；
 - 3 个 demo SKU 分别演示什么；
 - 为什么 blocked 是预期结果；
 - 如何换成你自己的 mock 商品。

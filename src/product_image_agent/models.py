@@ -18,9 +18,12 @@ class ProductTask:
     notes: str = ""
 
     @classmethod
-    def from_row(cls, row: dict[str, str]) -> "ProductTask":
+    def from_row(cls, row: dict[str, object]) -> "ProductTask":
         def text(key: str, default: str = "") -> str:
-            return (row.get(key) or default).strip()
+            value = row.get(key)
+            if value is None or value == "":
+                value = default
+            return str(value).strip()
 
         try:
             output_count = int(text("output_count", "1"))

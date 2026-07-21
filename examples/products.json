@@ -1,0 +1,26 @@
+{
+  "products": [
+    {
+      "sku": "DEMO-LAMP-01",
+      "product_name": "Portable Desk Lamp",
+      "category": "home office",
+      "style": "warm minimalist, soft shadows",
+      "output_count": 2,
+      "target": "mock_only",
+      "requested_action": "generate_mock_images",
+      "source_image": "DEMO-LAMP-01.svg",
+      "notes": "JSON input demo; show scale, no fake certification badges"
+    },
+    {
+      "sku": "DEMO-BAG-02",
+      "product_name": "Travel Organizer Bag",
+      "category": "travel",
+      "style": "premium neutral, clean compartments",
+      "output_count": 1,
+      "target": "mock_only",
+      "requested_action": "generate_mock_images",
+      "source_image": "DEMO-BAG-02.svg",
+      "notes": "JSON input demo; highlight pockets without inventing logos"
+    }
+  ]
+}

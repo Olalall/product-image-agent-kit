@@ -28,6 +28,12 @@ class ProductImageAgentTests(unittest.TestCase):
         self.assertEqual(len(tasks), 3)
         self.assertEqual(tasks[0].sku, "DEMO-LAMP-01")
 
+    def test_load_products_reads_example_json(self) -> None:
+        tasks = load_products(PROJECT_ROOT / "examples" / "products.json")
+        self.assertEqual(len(tasks), 2)
+        self.assertEqual(tasks[0].sku, "DEMO-LAMP-01")
+        self.assertEqual(tasks[0].output_count, 2)
+
     def test_scan_reports_ready_inputs(self) -> None:
         result = scan_inputs(PROJECT_ROOT / "examples" / "products.csv", PROJECT_ROOT / "examples" / "input-images")
         self.assertEqual(result["product_count"], 3)
@@ -63,12 +69,26 @@ class ProductImageAgentTests(unittest.TestCase):
         self.assertIn("run_started", events)
         self.assertIn("run_finished", events)
 
+    def test_pipeline_accepts_json_products(self) -> None:
+        result = run_pipeline(PROJECT_ROOT / "examples" / "products.json", PROJECT_ROOT / "examples" / "input-images", self.tmp / "json-run")
+        summary = result["summary"]
+        self.assertEqual(summary["found"], 2)
+        self.assertEqual(summary["generated"], 3)
+        self.assertEqual(summary["failed"], 0)
+        self.assertEqual(summary["blocked"], 0)
+
     def test_missing_required_csv_column_fails_fast(self) -> None:
         products = self.tmp / "bad.csv"
         with products.open("w", encoding="utf-8", newline="") as handle:
             writer = csv.DictWriter(handle, fieldnames=["sku", "product_name"])
             writer.writeheader()
             writer.writerow({"sku": "A", "product_name": "Missing style"})
+        with self.assertRaises(ValueError):
+            load_products(products)
+
+    def test_invalid_json_shape_fails_fast(self) -> None:
+        products = self.tmp / "bad.json"
+        products.write_text(json.dumps({"items": []}), encoding="utf-8")
         with self.assertRaises(ValueError):
             load_products(products)
 

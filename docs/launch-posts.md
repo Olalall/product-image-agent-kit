@@ -1,24 +1,36 @@
-# Launch Posts
+﻿# Launch Posts
 
-## Short tagline
+## Core positioning
 
+Tagline:
+
+```text
 Local-first AI product image workflow toolkit with mock generation, QA reports, and approval gates.
+```
+
+One-liner:
+
+```text
+Product Image Agent Kit helps e-commerce automation builders test the full product-image workflow before connecting paid image APIs or live stores.
+```
 
 ## X / LinkedIn
 
+```text
 I just open-sourced Product Image Agent Kit.
 
-It turns product rows + source images into a safe local workflow:
+Most AI image demos stop at "generate an image". Real e-commerce workflows need the boring parts too:
 
-- CSV input
+- CSV/SKU input checks
 - prompt planning
-- mock image generation
+- mock image outputs without API keys
 - QA reports
 - event logs
 - package.zip
-- human approval gate for live publish/upload actions
+- human approval gate for live upload/publish actions
 
-No API key required for the demo.
+Built for e-commerce operators and AI automation builders who want a safe mock-to-production starter.
+```
 
 ## Hacker News - Show HN
 
@@ -56,4 +68,16 @@ It is not another chatbot demo. It focuses on the operational workflow around AI
 - human approval gate for live upload/publish actions
 
 Looking for feedback from people building e-commerce or image-generation automations.
+```
+
+## GitHub About text
+
+```text
+Local-first AI product image workflow toolkit with mock generation, QA reports, and approval gates.
+```
+
+## GitHub topics
+
+```text
+ai-agents ecommerce image-generation workflow-automation product-images mock-first qa-report python cli
 ```

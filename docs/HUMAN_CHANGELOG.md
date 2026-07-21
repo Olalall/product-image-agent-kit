@@ -31,3 +31,11 @@ Before: the repository had working code and docs, but lacked common GitHub contr
 After: the repository includes GitHub Actions CI, issue templates, `CONTRIBUTING.md`, `SECURITY.md`, and `docs/launch-posts.md`.
 
 Risk: this is a mock starter kit, not a production image-generation backend. Real image providers and external uploads are intentionally blocked until a future explicit approval gate is implemented.
+
+## 2026-07-21 - README conversion rewrite
+
+Type: documentation and launch-positioning optimization.
+
+Before: the README explained the project, but it still read like a normal technical README.
+
+After: the README now follows a higher-conversion GitHub launch shape: screenshot-first hero, 30-second demo, clear use cases, safety-gate proof, agent-builder notes, comparison table, and direct star CTA.

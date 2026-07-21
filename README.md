@@ -1,22 +1,62 @@
-# Product Image Agent Kit
+﻿# Product Image Agent Kit
 
-Local-first AI product image workflow toolkit with **CSV input**, **prompt planning**, **mock image generation**, **QA reports**, and **safe human approval gates**.
+<p align="center">
+  <img src="docs/screenshots/report-demo.png" alt="Product Image Agent Kit demo report" width="100%">
+</p>
 
-This repo is designed for e-commerce operators and automation builders who want a clean starting point for product-image pipelines without committing API keys, private product data, or marketplace credentials.
+<p align="center">
+  <strong>Local-first AI product image workflow toolkit for e-commerce automation.</strong>
+</p>
 
-## Demo preview
+<p align="center">
+  <a href="#30-second-demo">30-second demo</a> ·
+  <a href="#what-can-it-do">What it does</a> ·
+  <a href="#safety-gate">Safety gate</a> ·
+  <a href="#for-ai-agent-builders">For AI agents</a> ·
+  <a href="CONTRIBUTING.md">Contributing</a>
+</p>
 
-![Product Image Agent Kit report demo](docs/screenshots/report-demo.png)
+<p align="center">
+  <img alt="Python 3.11+" src="https://img.shields.io/badge/python-3.11%2B-blue">
+  <img alt="License MIT" src="https://img.shields.io/badge/license-MIT-green">
+  <img alt="No API key required" src="https://img.shields.io/badge/demo-no%20API%20key-orange">
+  <img alt="Mock first" src="https://img.shields.io/badge/workflow-mock--first-purple">
+</p>
 
-## Why star this repo?
+Most AI image demos stop at "generate an image". Real e-commerce image work needs the boring parts too: input checks, prompt plans, QA, logs, packages, and a hard stop before anything writes to a live store.
 
-- **Runs without an API key**: the default demo is fully mock and deterministic.
-- **Shows the whole workflow**: product rows → source-image scan → prompt plan → mock outputs → QA → package.
-- **Built for safe automation**: external upload, overwrite, delete, and publish actions are blocked by a human approval gate.
-- **Useful for AI agent builders**: every run writes structured artifacts (`manifest.json`, `qa_report.json`, `events.jsonl`).
-- **Small enough to learn from**: Python standard library only for the default path.
+Product Image Agent Kit gives you that missing workflow layer.
 
-## Quick start
+If you are building AI image automation for e-commerce, **star this repo** to follow the mock-to-production roadmap.
+
+## What can it do?
+
+### 1. Turn product rows into prompt plans
+
+Input a simple CSV with SKU, product name, category, style, and output count. The planner creates structured prompt plans while keeping the product source image as the visual anchor.
+
+### 2. Generate mock outputs without API keys
+
+The default workflow generates deterministic SVG mock product images. You can test the full pipeline without OpenAI keys, paid image APIs, marketplace accounts, or private product data.
+
+### 3. Write QA and handoff artifacts
+
+Every run produces:
+
+```text
+report.html       # human-readable visual report
+report.md         # lightweight handoff report
+manifest.json     # structured run manifest
+qa_report.json    # machine-readable QA result
+events.jsonl      # audit log for each step
+package.zip       # portable output package
+```
+
+### 4. Block unsafe live actions
+
+Rows that request live upload, publish, overwrite, or delete are blocked by default and marked as requiring human approval.
+
+## 30-second demo
 
 ```powershell
 git clone <your-repo-url> product-image-agent-kit
@@ -25,35 +65,21 @@ python -m pip install -e .
 python -m product_image_agent.cli demo --clean --out runs\demo
 ```
 
-Open the report:
+Open:
 
 ```text
 runs/demo/report.html
 ```
 
-The demo writes:
-
-```text
-runs/demo/
-  report.html
-  report.md
-  manifest.json
-  qa_report.json
-  events.jsonl
-  prompts/
-  mock_outputs/
-  package.zip
-```
-
-Expected demo summary:
+Expected summary:
 
 ```text
 found=3 generated=3 failed=0 moved=3 skipped=1 blocked=1
 ```
 
-`blocked=1` is intentional: the sample includes one live publish request to demonstrate the human approval gate.
+`blocked=1` is intentional: the sample includes one live publish request to demonstrate the approval gate.
 
-## CLI commands
+## Quick CLI reference
 
 Scan input readiness:
 
@@ -61,7 +87,7 @@ Scan input readiness:
 python -m product_image_agent.cli scan --products examples\products.csv --images examples\input-images
 ```
 
-Run a custom local workflow:
+Run a local workflow:
 
 ```powershell
 python -m product_image_agent.cli run --products examples\products.csv --images examples\input-images --out runs\manual --clean
@@ -73,7 +99,7 @@ Run tests:
 python -m unittest discover -s tests
 ```
 
-Alternative without installing:
+Use without installing:
 
 ```powershell
 $env:PYTHONPATH='src'
@@ -85,22 +111,6 @@ If your Python scripts folder is on `PATH`, the console shortcut also works:
 ```powershell
 product-image-agent demo --clean --out runs\demo
 ```
-
-## For contributors
-
-This project is intentionally small and mock-first. If you want to contribute, start here:
-
-- Read `CONTRIBUTING.md`.
-- Run `python -m unittest discover -s tests`.
-- Pick one roadmap item or open a focused issue.
-- Keep all sample data synthetic.
-
-Useful starter issues:
-
-- Add a JSON input adapter.
-- Add a Shopify CSV template.
-- Add more QA checks for marketplace copy risks.
-- Add real-provider adapter interface with an explicit cost-confirmation gate.
 
 ## Example input
 
@@ -117,7 +127,7 @@ Source images live in:
 examples/input-images/<SKU>.svg
 ```
 
-## Safety gate example
+## Safety gate
 
 The bundled sample includes one intentionally blocked row:
 
@@ -134,6 +144,35 @@ Because this targets a live external channel, the planner returns:
   "reason": "External write/publish action requires explicit human approval."
 }
 ```
+
+## For AI agent builders
+
+This repository is designed to be easy for coding agents to inspect and call:
+
+- small Python modules;
+- deterministic demo data;
+- structured JSON artifacts;
+- append-only `events.jsonl` logs;
+- no-key mock mode;
+- explicit safety boundaries in code and docs.
+
+A coding agent can run the workflow, inspect `manifest.json`, read QA issues, and decide the next safe action without scraping prose.
+
+## Why not just use Dify, ComfyUI, or LangChain?
+
+Use those tools when you need a full AI app platform, image workflow graph, or general LLM framework.
+
+Use Product Image Agent Kit when you need a small, inspectable starter for the operational layer around e-commerce product images:
+
+| Need | This repo |
+|---|---|
+| CSV/SKU input checks | Yes |
+| Source-image anchoring contract | Yes |
+| Mock image outputs without API keys | Yes |
+| QA and handoff package | Yes |
+| Human approval gate for live actions | Yes |
+| Full model/workflow platform | No |
+| Marketplace uploader | No |
 
 ## Workflow
 
@@ -161,6 +200,13 @@ src/product_image_agent/
   cli.py          # CLI entrypoint
 ```
 
+## Who is this for?
+
+- E-commerce operators prototyping product-image automation.
+- AI automation builders who need a realistic non-chatbot portfolio project.
+- Agent developers who want a small workflow with structured outputs and safety gates.
+- Teams that want to test image-pipeline logic before connecting paid providers.
+
 ## What this is not
 
 - Not a marketplace uploader.
@@ -176,13 +222,29 @@ src/product_image_agent/
 - [ ] More QA rules for copy claims, text density, aspect ratios, and source-image anchoring.
 - [ ] Web UI for non-technical operators.
 
+## For contributors
+
+This project is intentionally small and mock-first. If you want to contribute, start here:
+
+- Read `CONTRIBUTING.md`.
+- Run `python -m unittest discover -s tests`.
+- Pick one roadmap item or open a focused issue.
+- Keep all sample data synthetic.
+
+Good first issues:
+
+- Add a JSON input adapter.
+- Add a Shopify CSV template.
+- Add more QA checks for marketplace copy risks.
+- Add a real-provider adapter interface with an explicit cost-confirmation gate.
+
 ## Launch notes
 
 Before publishing to GitHub:
 
 1. Replace `<your-repo-url>` in the quickstart after the repository exists.
 2. Add topics: `ai-agents`, `ecommerce`, `image-generation`, `workflow-automation`, `product-images`.
-3. Post the screenshot above with the short tagline: `Local-first AI product image workflow toolkit with mock generation, QA reports, and approval gates.`
+3. Post the screenshot above with the tagline: `Local-first AI product image workflow toolkit with mock generation, QA reports, and approval gates.`
 4. Use `docs/launch-posts.md` for copy-paste launch drafts.
 
 ## License

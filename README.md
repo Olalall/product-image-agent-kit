@@ -239,12 +239,12 @@ Good first issues:
 - Add more QA checks for marketplace copy risks.
 - Add a real-provider adapter interface with an explicit cost-confirmation gate.
 
-## Launch notes
+## Share this project
 
-Before publishing to GitHub:
+If this repo helps your e-commerce image automation work:
 
-1. Add topics: `ai-agents`, `ecommerce`, `image-generation`, `workflow-automation`, `product-images`.
-2. Post the screenshot above with the tagline: `Local-first AI product image workflow toolkit with mock generation, QA reports, and approval gates.`
+1. Star it so you can follow the mock-to-production roadmap.
+2. Share the screenshot above with the tagline: `Local-first AI product image workflow toolkit with mock generation, QA reports, and approval gates.`
 3. Use `docs/launch-posts.md` for copy-paste launch drafts.
 
 ## License

@@ -39,3 +39,11 @@ Type: documentation and launch-positioning optimization.
 Before: the README explained the project, but it still read like a normal technical README.
 
 After: the README now follows a higher-conversion GitHub launch shape: screenshot-first hero, 30-second demo, clear use cases, safety-gate proof, agent-builder notes, comparison table, and direct star CTA.
+
+## 2026-07-21 - Post-publish README cleanup
+
+Type: public page cleanup.
+
+Before: after the first GitHub push, the README still contained a "Before publishing to GitHub" section.
+
+After: the README now uses a public-facing "Share this project" section with a star CTA and launch-post pointer.

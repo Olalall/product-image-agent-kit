@@ -46,6 +46,13 @@ class ProductImageAgentTests(unittest.TestCase):
         self.assertEqual(tasks[0].sku, "DEMO-LAMP-01")
         self.assertEqual(tasks[0].target, "mock_only")
 
+    def test_amazon_template_uses_canonical_required_columns(self) -> None:
+        tasks = load_products(PROJECT_ROOT / "examples" / "templates" / "amazon-image-package.csv")
+        self.assertEqual(len(tasks), 4)
+        self.assertEqual(tasks[0].sku, "DEMO-LAMP-01")
+        self.assertEqual(tasks[0].target, "mock_only")
+        self.assertEqual(tasks[0].output_count, 1)
+
     def test_external_publish_is_blocked(self) -> None:
         task = load_products(PROJECT_ROOT / "examples" / "products.csv")[2]
         plan = build_prompt_plan(task)
@@ -74,6 +81,14 @@ class ProductImageAgentTests(unittest.TestCase):
         summary = result["summary"]
         self.assertEqual(summary["found"], 2)
         self.assertEqual(summary["generated"], 3)
+        self.assertEqual(summary["failed"], 0)
+        self.assertEqual(summary["blocked"], 0)
+
+    def test_pipeline_accepts_amazon_template(self) -> None:
+        result = run_pipeline(PROJECT_ROOT / "examples" / "templates" / "amazon-image-package.csv", PROJECT_ROOT / "examples" / "input-images", self.tmp / "amazon-run")
+        summary = result["summary"]
+        self.assertEqual(summary["found"], 4)
+        self.assertEqual(summary["generated"], 6)
         self.assertEqual(summary["failed"], 0)
         self.assertEqual(summary["blocked"], 0)
 

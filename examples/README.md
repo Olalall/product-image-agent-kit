@@ -14,6 +14,7 @@ examples/
     DEMO-LIVE-03.svg
   templates/
     shopify-products.csv
+    amazon-image-package.csv
 ```
 
 ## `products.csv` columns
@@ -70,6 +71,43 @@ found=3 generated=3 failed=0 moved=3 skipped=1 blocked=1
 
 `blocked=1` is a feature, not a bug. It proves the human approval gate is working.
 
+## Marketplace-oriented templates
+
+Templates under `examples/templates/` are synthetic starter inputs. They are not marketplace upload files and do not contain real seller data.
+
+### Shopify template
+
+```text
+examples/templates/shopify-products.csv
+```
+
+Adds Shopify-oriented planning columns such as:
+
+- `shopify_handle`
+- `shopify_collection`
+- `shopify_image_slot`
+
+### Amazon image package template
+
+```text
+examples/templates/amazon-image-package.csv
+```
+
+Adds Amazon-oriented planning columns such as:
+
+- `amazon_marketplace`
+- `listing_image_slot`
+- `aspect_ratio`
+- `package_role`
+
+The Amazon template demonstrates common planning slots:
+
+- `main-image`: main product image placeholder;
+- `feature-images`: secondary feature image placeholders;
+- `a-plus-banner`: wide A+ content placeholder.
+
+It is intentionally **not** an Amazon uploader. The output is still a local mock workflow package.
+
 ## Replace with your own mock data
 
 1. Copy `examples/products.csv` to a new file.
@@ -91,6 +129,12 @@ For JSON input:
 
 ```powershell
 python -m product_image_agent.cli run --products examples\products.json --images examples\input-images --out runs\json-demo --clean
+```
+
+For the Amazon template:
+
+```powershell
+python -m product_image_agent.cli run --products examples\templates\amazon-image-package.csv --images examples\input-images --out runs\amazon-template --clean
 ```
 
 ## Output artifacts

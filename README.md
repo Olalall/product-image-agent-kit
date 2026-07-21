@@ -157,6 +157,14 @@ A Shopify-oriented synthetic template is available at:
 examples/templates/shopify-products.csv
 ```
 
+An Amazon-oriented synthetic image package template is available at:
+
+```text
+examples/templates/amazon-image-package.csv
+```
+
+It demonstrates main image, secondary feature image, and A+ banner planning slots without uploading to Amazon.
+
 ## Safety gate
 
 The bundled sample includes one intentionally blocked row:
@@ -266,6 +274,7 @@ Good first issues:
 
 - Add a JSON input adapter.
 - Extend the Shopify CSV template with more slots.
+- Extend the Amazon image package template with more package roles.
 - Add more QA checks for marketplace copy risks.
 - Add a real-provider adapter interface with an explicit cost-confirmation gate.
 

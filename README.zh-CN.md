@@ -100,6 +100,7 @@ examples/README.md
 
 - `products.csv` 每列含义；
 - `products.json` 输入格式；
+- Shopify / Amazon 合成模板；
 - 3 个 demo SKU 分别演示什么；
 - 为什么 blocked 是预期结果；
 - 如何换成你自己的 mock 商品。

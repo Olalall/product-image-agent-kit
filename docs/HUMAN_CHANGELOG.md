@@ -71,3 +71,11 @@ Type: input compatibility improvement.
 Before: the workflow only loaded product tasks from CSV files.
 
 After: `--products` accepts both CSV and JSON inputs, with a synthetic `examples/products.json` sample and tests covering JSON runs.
+
+## 2026-07-21 - Amazon image package template
+
+Type: starter-template improvement.
+
+Before: the examples included generic CSV/JSON inputs and a Shopify-oriented template, but no Amazon-oriented package planning template.
+
+After: `examples/templates/amazon-image-package.csv` demonstrates synthetic main image, secondary feature image, and A+ banner planning slots without adding any Amazon upload behavior.

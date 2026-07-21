@@ -59,7 +59,7 @@ Rows that request live upload, publish, overwrite, or delete are blocked by defa
 ## 30-second demo
 
 ```powershell
-git clone <your-repo-url> product-image-agent-kit
+git clone https://github.com/Olalall/product-image-agent-kit.git product-image-agent-kit
 cd product-image-agent-kit
 python -m pip install -e .
 python -m product_image_agent.cli demo --clean --out runs\demo
@@ -242,7 +242,7 @@ Good first issues:
 
 Before publishing to GitHub:
 
-1. Replace `<your-repo-url>` in the quickstart after the repository exists.
+1. Replace `https://github.com/Olalall/product-image-agent-kit.git` in the quickstart after the repository exists.
 2. Add topics: `ai-agents`, `ecommerce`, `image-generation`, `workflow-automation`, `product-images`.
 3. Post the screenshot above with the tagline: `Local-first AI product image workflow toolkit with mock generation, QA reports, and approval gates.`
 4. Use `docs/launch-posts.md` for copy-paste launch drafts.
@@ -250,3 +250,4 @@ Before publishing to GitHub:
 ## License
 
 MIT
+

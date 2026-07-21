@@ -106,6 +106,8 @@ class RunSummary:
     def status(self) -> str:
         if self.failed:
             return "fail"
+        if self.blocked and self.blocked == self.found:
+            return "blocked"
         if self.blocked or self.skipped:
             return "warn"
         return "pass"

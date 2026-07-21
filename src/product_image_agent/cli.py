@@ -29,10 +29,10 @@ def main(argv: list[str] | None = None) -> None:
     if args.command == "run":
         if args.clean and args.out.exists():
             shutil.rmtree(args.out)
-        result = run_pipeline(args.products, args.images, args.out)
+        result = run_pipeline(args.products, args.images, args.out, provider_name=args.provider, confirm_cost=args.confirm_cost)
         print(json.dumps(result, ensure_ascii=False, indent=2))
         summary = result["summary"]
-        if isinstance(summary, dict) and summary.get("status") == "fail":
+        if isinstance(summary, dict) and summary.get("status") in {"fail", "blocked"}:
             raise SystemExit(1)
         return
     if args.command == "screenshot":
@@ -58,6 +58,8 @@ def build_parser() -> argparse.ArgumentParser:
     run.add_argument("--products", type=Path, required=True)
     run.add_argument("--images", type=Path, required=True)
     run.add_argument("--out", type=Path, default=Path("runs/manual"))
+    run.add_argument("--provider", choices=["mock", "openai"], default="mock", help="Image provider. Only mock is executable in this release.")
+    run.add_argument("--confirm-cost", action="store_true", help="Required before any future paid provider can run.")
     run.add_argument("--clean", action="store_true", help="Delete the selected output folder before running.")
 
     screenshot = sub.add_parser("screenshot", help="Capture a PNG screenshot from a generated report.html.")

@@ -13,6 +13,7 @@ sys.path.insert(0, str(PROJECT_ROOT / "src"))
 
 from product_image_agent.pipeline import run_pipeline  # noqa: E402
 from product_image_agent.planner import build_prompt_plan  # noqa: E402
+from product_image_agent.providers import check_provider_readiness  # noqa: E402
 from product_image_agent.scanner import load_products, scan_inputs  # noqa: E402
 from product_image_agent.screenshot import build_screenshot_command  # noqa: E402
 
@@ -92,6 +93,52 @@ class ProductImageAgentTests(unittest.TestCase):
         self.assertEqual(summary["generated"], 6)
         self.assertEqual(summary["failed"], 0)
         self.assertEqual(summary["blocked"], 0)
+
+    def test_mock_provider_is_ready(self) -> None:
+        readiness = check_provider_readiness("mock")
+        self.assertEqual(readiness.status, "pass")
+        self.assertFalse(readiness.requires_confirm_cost)
+
+    def test_real_provider_requires_cost_confirmation(self) -> None:
+        readiness = check_provider_readiness("openai", confirm_cost=False)
+        self.assertEqual(readiness.status, "blocked")
+        self.assertTrue(readiness.requires_confirm_cost)
+        self.assertIn("--confirm-cost", readiness.reason)
+
+    def test_real_provider_remains_blocked_until_adapter_exists(self) -> None:
+        readiness = check_provider_readiness("openai", confirm_cost=True)
+        self.assertEqual(readiness.status, "blocked")
+        self.assertIn("not implemented", readiness.reason)
+
+    def test_pipeline_blocks_real_provider_without_cost_confirmation(self) -> None:
+        result = run_pipeline(
+            PROJECT_ROOT / "examples" / "products.json",
+            PROJECT_ROOT / "examples" / "input-images",
+            self.tmp / "openai-blocked",
+            provider_name="openai",
+            confirm_cost=False,
+        )
+        summary = result["summary"]
+        self.assertEqual(summary["status"], "blocked")
+        self.assertEqual(summary["found"], 2)
+        self.assertEqual(summary["generated"], 0)
+        self.assertEqual(summary["blocked"], 2)
+        self.assertTrue((self.tmp / "openai-blocked" / "events.jsonl").exists())
+
+    def test_pipeline_blocks_confirmed_real_provider_until_adapter_exists(self) -> None:
+        result = run_pipeline(
+            PROJECT_ROOT / "examples" / "products.json",
+            PROJECT_ROOT / "examples" / "input-images",
+            self.tmp / "openai-confirmed-blocked",
+            provider_name="openai",
+            confirm_cost=True,
+        )
+        summary = result["summary"]
+        self.assertEqual(summary["status"], "blocked")
+        self.assertEqual(summary["found"], 2)
+        self.assertEqual(summary["generated"], 0)
+        self.assertEqual(summary["blocked"], 2)
+        self.assertIn("not implemented", result["provider"]["reason"])
 
     def test_missing_required_csv_column_fails_fast(self) -> None:
         products = self.tmp / "bad.csv"

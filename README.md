@@ -94,6 +94,20 @@ Run a local workflow:
 python -m product_image_agent.cli run --products examples\products.csv --images examples\input-images --out runs\manual --clean
 ```
 
+Use the explicit mock provider:
+
+```powershell
+python -m product_image_agent.cli run --provider mock --products examples\products.csv --images examples\input-images --out runs\manual --clean
+```
+
+Reserved real providers are blocked by default:
+
+```powershell
+python -m product_image_agent.cli run --provider openai --products examples\products.json --images examples\input-images --out runs\openai-blocked --clean
+```
+
+Even with `--confirm-cost`, the current release still blocks `openai` because the real adapter interface exists but no paid adapter is implemented yet.
+
 Run the same workflow from JSON:
 
 ```powershell
@@ -204,6 +218,8 @@ This repository is designed to be easy for coding agents to inspect and call:
 - structured JSON artifacts;
 - append-only `events.jsonl` logs;
 - no-key mock mode;
+- provider readiness checks;
+- `--confirm-cost` safety gate for future paid providers;
 - explicit safety boundaries in code and docs.
 
 A coding agent can run the workflow, inspect `manifest.json`, read QA issues, and decide the next safe action without scraping prose.
@@ -221,6 +237,7 @@ Use Product Image Agent Kit when you need a small, inspectable starter for the o
 | Mock image outputs without API keys | Yes |
 | QA and handoff package | Yes |
 | Human approval gate for live actions | Yes |
+| Provider interface with cost-confirmation gate | Yes |
 | Full model/workflow platform | No |
 | Marketplace uploader | No |
 
@@ -243,6 +260,7 @@ flowchart LR
 src/product_image_agent/
   scanner.py      # CSV and source-image discovery
   planner.py      # prompt planning and safety decisions
+  providers.py    # provider interface, mock provider, cost-confirmation gate
   generator.py    # deterministic mock SVG generation
   qa.py           # lightweight QA checks
   report.py       # JSON, Markdown, HTML, ZIP artifacts
@@ -266,7 +284,8 @@ src/product_image_agent/
 
 ## Roadmap
 
-- [ ] Real-provider adapter interface with explicit cost confirmation.
+- [x] Provider adapter interface with explicit cost confirmation.
+- [ ] Real paid provider implementation behind the existing confirmation gate.
 - [ ] Shopify and Amazon CSV templates.
 - [x] Browser screenshot automation for `report.html`.
 - [ ] More QA rules for copy claims, text density, aspect ratios, and source-image anchoring.

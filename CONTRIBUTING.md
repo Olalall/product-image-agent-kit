@@ -33,3 +33,5 @@ Real image providers are welcome, but they must be opt-in and guarded:
 - explicit cost-confirmation flag;
 - clear provider readiness checks;
 - no external upload, overwrite, delete, or publish without human approval.
+
+The current code already includes the provider interface and a mock provider. Real providers should extend that interface without changing the default `mock` behavior.

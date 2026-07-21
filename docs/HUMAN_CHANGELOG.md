@@ -87,3 +87,11 @@ Type: documentation automation improvement.
 Before: the README demo screenshot had to be captured manually from `runs/demo/report.html`.
 
 After: the CLI includes a `screenshot` command that uses local Chrome, Chromium, or Edge to regenerate `docs/screenshots/report-demo.png` from a generated report.
+
+## 2026-07-21 - Provider interface and cost gate
+
+Type: safety and extensibility improvement.
+
+Before: generation was hard-wired to deterministic mock outputs, with no explicit provider boundary.
+
+After: the workflow has a provider interface, executable `mock` provider, provider readiness checks, and a `--confirm-cost` gate for reserved real providers. The `openai` provider name is reserved but remains blocked because no paid adapter is implemented.

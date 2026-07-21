@@ -2,22 +2,38 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from .generator import generate_mock_assets
 from .models import GeneratedAsset, PromptPlan, QAItem, RunSummary
 from .planner import build_prompt_plan
+from .providers import check_provider_readiness, get_provider
 from .qa import qa_task
 from .report import append_event, write_reports
 from .scanner import discover_assets, load_products
 
 
-def run_pipeline(products_csv: Path, images_dir: Path, out_dir: Path) -> dict[str, object]:
+def run_pipeline(
+    products_csv: Path,
+    images_dir: Path,
+    out_dir: Path,
+    provider_name: str = "mock",
+    confirm_cost: bool = False,
+) -> dict[str, object]:
     tasks = load_products(products_csv)
     assets = discover_assets(images_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
     events_path = out_dir / "events.jsonl"
     if events_path.exists():
         events_path.unlink()
-    append_event(events_path, "run_started", {"products": str(products_csv), "images": str(images_dir), "out": str(out_dir)})
+    provider_readiness = check_provider_readiness(provider_name, confirm_cost=confirm_cost)
+    append_event(
+        events_path,
+        "run_started",
+        {
+            "products": str(products_csv),
+            "images": str(images_dir),
+            "out": str(out_dir),
+            "provider": provider_readiness.to_dict(),
+        },
+    )
 
     summary = RunSummary(found=len(tasks))
     plans: list[PromptPlan] = []
@@ -25,6 +41,20 @@ def run_pipeline(products_csv: Path, images_dir: Path, out_dir: Path) -> dict[st
     generated: list[GeneratedAsset] = []
     qa_items: list[QAItem] = []
     failures: list[dict[str, str]] = []
+    if provider_readiness.status != "pass":
+        if provider_readiness.status == "blocked":
+            summary.blocked = len(tasks)
+            summary.skipped = len(tasks)
+            failures = []
+        else:
+            summary.failed = len(tasks)
+            failures = [{"sku": "provider", "reason": provider_readiness.reason}]
+        artifacts = write_reports(out_dir, summary, plans, generated, qa_items, blocked, failures)
+        append_event(events_path, "provider_blocked", {"provider": provider_readiness.to_dict()})
+        append_event(events_path, "run_finished", {"summary": summary.to_dict(), "artifacts": artifacts})
+        return {"summary": summary.to_dict(), "provider": provider_readiness.to_dict(), "artifacts": artifacts, "events": str(events_path)}
+
+    provider = get_provider(provider_readiness.provider)
 
     for task in tasks:
         plan = build_prompt_plan(task)
@@ -46,7 +76,7 @@ def run_pipeline(products_csv: Path, images_dir: Path, out_dir: Path) -> dict[st
             append_event(events_path, "task_failed", {"sku": task.sku, "reason": reason})
             continue
         plans.append(plan)
-        outputs = generate_mock_assets(task, asset, plan, out_dir)
+        outputs = provider.generate(task, asset, plan, out_dir)
         generated.extend(outputs)
         summary.generated += len(outputs)
         summary.moved += len(outputs)
@@ -58,4 +88,4 @@ def run_pipeline(products_csv: Path, images_dir: Path, out_dir: Path) -> dict[st
 
     artifacts = write_reports(out_dir, summary, plans, generated, qa_items, blocked, failures)
     append_event(events_path, "run_finished", {"summary": summary.to_dict(), "artifacts": artifacts})
-    return {"summary": summary.to_dict(), "artifacts": artifacts, "events": str(events_path)}
+    return {"summary": summary.to_dict(), "provider": provider_readiness.to_dict(), "artifacts": artifacts, "events": str(events_path)}

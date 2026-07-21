@@ -88,6 +88,14 @@ runs/demo/
 python -m product_image_agent.cli run --provider openai --confirm-cost ...
 ```
 
+当前版本已经有 provider 接口和成本确认安全门，但没有实现真实付费 provider。也就是说：
+
+```powershell
+python -m product_image_agent.cli run --provider openai --products examples\products.json --images examples\input-images --out runs\openai-blocked --clean
+```
+
+会被拦截；即使加上 `--confirm-cost`，也会因为真实 adapter 尚未实现而继续 blocked。
+
 ## 示例数据
 
 查看：

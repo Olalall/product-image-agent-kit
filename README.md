@@ -242,12 +242,10 @@ Good first issues:
 
 Before publishing to GitHub:
 
-1. Replace `https://github.com/Olalall/product-image-agent-kit.git` in the quickstart after the repository exists.
-2. Add topics: `ai-agents`, `ecommerce`, `image-generation`, `workflow-automation`, `product-images`.
-3. Post the screenshot above with the tagline: `Local-first AI product image workflow toolkit with mock generation, QA reports, and approval gates.`
-4. Use `docs/launch-posts.md` for copy-paste launch drafts.
+1. Add topics: `ai-agents`, `ecommerce`, `image-generation`, `workflow-automation`, `product-images`.
+2. Post the screenshot above with the tagline: `Local-first AI product image workflow toolkit with mock generation, QA reports, and approval gates.`
+3. Use `docs/launch-posts.md` for copy-paste launch drafts.
 
 ## License
 
 MIT
-

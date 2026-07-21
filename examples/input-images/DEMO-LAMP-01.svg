@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+  <rect width="800" height="600" fill="#fffaf5"/>
+  <rect x="180" y="120" width="440" height="360" rx="40" fill="#f59e0b" opacity="0.18" stroke="#f59e0b" stroke-width="8"/>
+  <circle cx="400" cy="270" r="95" fill="#f59e0b" opacity="0.55"/>
+  <text x="400" y="420" text-anchor="middle" font-family="Arial, sans-serif" font-size="42" font-weight="700" fill="#222">Desk Lamp</text>
+  <text x="400" y="468" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" fill="#555">Synthetic demo source image</text>
+</svg>

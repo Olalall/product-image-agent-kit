@@ -1,0 +1,4 @@
+sku,product_name,category,style,output_count,target,requested_action,source_image,notes
+DEMO-LAMP-01,Portable Desk Lamp,home office,"warm minimalist, soft shadows",2,mock_only,generate_mock_images,DEMO-LAMP-01.svg,"show scale, no fake certification badges"
+DEMO-BAG-02,Travel Organizer Bag,travel,"premium neutral, clean compartments",1,mock_only,generate_mock_images,DEMO-BAG-02.svg,"highlight pockets without inventing logos"
+DEMO-LIVE-03,Glass Water Bottle,kitchen,"fresh lifestyle, bright background",1,shopify_live,publish_listing,DEMO-LIVE-03.svg,"intentionally blocked to demonstrate the human approval gate"

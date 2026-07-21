@@ -22,4 +22,12 @@ Before: the project could run, but the GitHub landing page did not show the gene
 
 After: `README.md` includes a demo screenshot from `docs/screenshots/report-demo.png`, the expected demo summary, and a short launch checklist.
 
+## 2026-07-21 - GitHub community readiness
+
+Type: open-source packaging.
+
+Before: the repository had working code and docs, but lacked common GitHub contribution, security, issue-template, CI, and launch-copy files.
+
+After: the repository includes GitHub Actions CI, issue templates, `CONTRIBUTING.md`, `SECURITY.md`, and `docs/launch-posts.md`.
+
 Risk: this is a mock starter kit, not a production image-generation backend. Real image providers and external uploads are intentionally blocked until a future explicit approval gate is implemented.

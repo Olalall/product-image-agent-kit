@@ -86,6 +86,22 @@ If your Python scripts folder is on `PATH`, the console shortcut also works:
 product-image-agent demo --clean --out runs\demo
 ```
 
+## For contributors
+
+This project is intentionally small and mock-first. If you want to contribute, start here:
+
+- Read `CONTRIBUTING.md`.
+- Run `python -m unittest discover -s tests`.
+- Pick one roadmap item or open a focused issue.
+- Keep all sample data synthetic.
+
+Useful starter issues:
+
+- Add a JSON input adapter.
+- Add a Shopify CSV template.
+- Add more QA checks for marketplace copy risks.
+- Add real-provider adapter interface with an explicit cost-confirmation gate.
+
 ## Example input
 
 `examples/products.csv`:
@@ -167,6 +183,7 @@ Before publishing to GitHub:
 1. Replace `<your-repo-url>` in the quickstart after the repository exists.
 2. Add topics: `ai-agents`, `ecommerce`, `image-generation`, `workflow-automation`, `product-images`.
 3. Post the screenshot above with the short tagline: `Local-first AI product image workflow toolkit with mock generation, QA reports, and approval gates.`
+4. Use `docs/launch-posts.md` for copy-paste launch drafts.
 
 ## License
 
